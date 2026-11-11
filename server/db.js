@@ -1,17 +1,43 @@
-import Database from 'better-sqlite3';
+// import Database from 'better-sqlite3';
+// import { mkdirSync } from 'node:fs';
+
+// // The database is a single local file, created automatically on first run.
+// mkdirSync('server/data', { recursive: true });
+// const db = new Database('server/data/solves.db');
+
+// db.exec(`
+//   CREATE TABLE IF NOT EXISTS solves (
+//     id         INTEGER PRIMARY KEY AUTOINCREMENT,
+//     facelets   TEXT    NOT NULL,
+//     moves      TEXT    NOT NULL,
+//     move_count INTEGER NOT NULL,
+//     created_at TEXT    NOT NULL DEFAULT (datetime('now'))
+//   )
+// `);
+
+// export default db;
+
+
+
+
+
+import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 
-// The database is a single local file, created automatically on first run.
+// Create the database folder automatically.
 mkdirSync('server/data', { recursive: true });
-const db = new Database('server/data/solves.db');
 
+// Create or open the SQLite database.
+const db = new DatabaseSync('server/data/solves.db');
+
+// Create the solves table if it doesn't exist.
 db.exec(`
   CREATE TABLE IF NOT EXISTS solves (
-    id         INTEGER PRIMARY KEY AUTOINCREMENT,
-    facelets   TEXT    NOT NULL,
-    moves      TEXT    NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    facelets TEXT NOT NULL,
+    moves TEXT NOT NULL,
     move_count INTEGER NOT NULL,
-    created_at TEXT    NOT NULL DEFAULT (datetime('now'))
+    created_at TEXT NOT NULL DEFAULT (datetime('now'))
   )
 `);
 
