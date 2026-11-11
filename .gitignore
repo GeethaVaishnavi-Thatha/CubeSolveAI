@@ -7,3 +7,4 @@ blob-report
 .playwright
 *.local
 .DS_Store
+server/data

@@ -1,6 +1,6 @@
 import { ROUTES } from '../lib/router.js';
 
-const LABELS = { home: 'Home', scan: 'Scan', review: 'Review', solve: 'Solve' };
+const LABELS = { home: 'Home', scan: 'Scan', review: 'Review', solve: 'Solve', history: 'History' };
 
 export default function Layout({ route, children }) {
   return (

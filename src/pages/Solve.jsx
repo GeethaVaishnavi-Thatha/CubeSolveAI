@@ -4,6 +4,7 @@ import { SOLVED_FACELETS } from '../cube/cubeState.js';
 import { solveFacelets, stepStates } from '../cube/solver.js';
 import { describeMove, affectedStickers, parseMove } from '../cube/moves.js';
 import { navigate } from '../lib/router.js';
+import { saveSolve } from '../lib/api.js';
 import { useScan } from '../state/ScanContext.jsx';
 import CrossNet from '../components/CrossNet.jsx';
 import CubeViewer from '../components/CubeViewer.jsx';
@@ -11,6 +12,7 @@ import EmptyState from '../components/EmptyState.jsx';
 
 const AUTOPLAY_MS = 1200;
 const EMPTY_SET = new Set();
+let lastSavedKey = ''; // avoids saving the same scan twice (e.g. React StrictMode in dev)
 
 export default function Solve() {
   const { scan, isComplete } = useScan();
@@ -82,6 +84,16 @@ function SolvePlayer({ result, states }) {
   const setup = useMemo(() => solution.invert(), [solution]);
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
+
+  // Save the solve to the backend. Failures are ignored so the app works without the server.
+  useEffect(() => {
+    const facelets = result.facelets.join('');
+    if (facelets === lastSavedKey) return;
+    lastSavedKey = facelets;
+    saveSolve(facelets, moves).catch(() => {
+      lastSavedKey = '';
+    });
+  }, [result, moves]);
 
   useEffect(() => {
     if (!playing) return undefined;

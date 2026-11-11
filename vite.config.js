@@ -21,8 +21,18 @@ export default defineConfig({
     rollupOptions: { output: { manualChunks: SOLVER_SAFE_CHUNKS } },
     chunkSizeWarningLimit: 1000,
   },
-  server: { host: '127.0.0.1', port: 5173, strictPort: true },
-  preview: { host: '127.0.0.1', port: 4173, strictPort: true },
+  server: {
+    host: '127.0.0.1',
+    port: 5173,
+    strictPort: true,
+    proxy: { '/api': 'http://127.0.0.1:3001' },
+  },
+  preview: {
+    host: '127.0.0.1',
+    port: 4173,
+    strictPort: true,
+    proxy: { '/api': 'http://127.0.0.1:3001' },
+  },
   test: {
     environment: 'node',
     include: ['src/**/*.test.js'],

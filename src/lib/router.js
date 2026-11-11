@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 // Minimal hash router (#/scan, #/review, #/solve) so the app needs no router dependency.
 // A query can follow the route, e.g. #/scan?face=R, to open a specific face.
-export const ROUTES = ['home', 'scan', 'review', 'solve'];
+export const ROUTES = ['home', 'scan', 'review', 'solve', 'history'];
 
 const readHash = () => window.location.hash.replace(/^#\/?/, '');
 

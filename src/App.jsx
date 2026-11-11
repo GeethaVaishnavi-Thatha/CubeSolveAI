@@ -5,6 +5,7 @@ import Layout from './components/Layout.jsx';
 import Home from './pages/Home.jsx';
 import Scan from './pages/Scan.jsx';
 import Review from './pages/Review.jsx';
+import History from './pages/History.jsx';
 
 // The solver and 3D viewer are large, so they load only when the solve page opens.
 const Solve = lazy(() => import('./pages/Solve.jsx'));
@@ -14,6 +15,7 @@ const PAGES = {
   scan: Scan,
   review: Review,
   solve: Solve,
+  history: History,
 };
 
 export default function App() {

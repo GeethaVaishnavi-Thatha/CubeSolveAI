@@ -9,10 +9,13 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "server": "node --env-file-if-exists=.env server/index.js"
   },
   "dependencies": {
+    "better-sqlite3": "^13.0.3",
     "cubing": "0.63.8",
+    "express": "^5.3.0",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
